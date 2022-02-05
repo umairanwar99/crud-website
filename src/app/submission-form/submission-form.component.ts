@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { data } from '../data';
 import { ManageService } from '../manage.service';
+import { InMemoryDataService } from '../in-memory-data.service';
 @Component({
   selector: 'app-submission-form',
   templateUrl: './submission-form.component.html',
@@ -21,6 +22,7 @@ export class SubmissionFormComponent implements OnInit{
 
   constructor(
     private route:ActivatedRoute,
+    private inMemory: InMemoryDataService,
     private location: Location,
     private manageService: ManageService, 
     private router: Router){
@@ -35,27 +37,31 @@ export class SubmissionFormComponent implements OnInit{
     console.log(this.route);
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     console.log(this.id);
-    if(this.id != 0){this.edit = true}
-    this.manageService.getRecord(this.id)
+    if(this.id != 0){
+      this.edit = true;
+      this.manageService.getRecord(this.id)
       .subscribe(d => this.model = d);
+    }
+
   }
 
-  goBack(): void {
-    this.location.back();
-  }
+
 
   onSubmit() { 
     this.submitted = true;
+    console.log(this.model);
     if(this.edit){
-      this.edit = false;
       this.manageService.updateRecord(this.model)
-        .subscribe(() => this.goBack());
+        .subscribe(()=>{console.log(this.model);});
     }
-    this.manageService.addRecord(this.model)
-      .subscribe(); console.log(this.model);
-      this.router.navigate(['']);
+    else{
+      this.manageService.addRecord(this.model)
+      .subscribe();
+    }
+ 
+    this.router.navigate(['']);
+      
   }
-  
 
   newHero() {
     this.model = new data(42, '',0 ,'',0);

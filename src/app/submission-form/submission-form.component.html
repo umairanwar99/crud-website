@@ -51,9 +51,10 @@
           </div>
         </div>
         
-        <button [hidden]="edit === false" type="submit" class="btn btn-success my-3" [disabled]="!thisForm.form.valid" (click)= "thisForm.reset()">Edit</button>
-        <button [hidden]="edit === true" type="submit" class="btn btn-success my-3" [disabled]="!thisForm.form.valid" (click)= "thisForm.reset()">Submit</button>
+        <button [hidden]="edit === false" type="submit" class="btn btn-success my-3" [disabled]="!thisForm.form.valid" (click)= "onSubmit();thisForm.reset()">Edit</button>
+        <button [hidden]="edit === true" type="submit" class="btn btn-success my-3" [disabled]="!thisForm.form.valid" (click)= " onSubmit();thisForm.reset()">Submit</button>
         <button [hidden]="edit === true" type="button" class="btn btn-success mx-3 my-3" (click)="newHero(); thisForm.reset()">Reset</button>
       </form>
     </div>
+</div>
   
