@@ -1,0 +1,34 @@
+<p>dashboard works!</p>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"> Id </th>
+                <th scope="col"> Name </th>
+                <th scope="col"> Amount </th>
+                <th scope="col"> Date </th>
+                <th scope="col"> Installments </th>
+                <th scope="col"> Action </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of records">
+                <td > {{data.id}} </td>
+                <td > {{data.name}} </td>
+                <td > {{data.amount}} </td>
+                <td > {{data.date}} </td>
+                <td > {{data.installments}}</td>
+                <td >
+                    <button class="btn btn-info" routerLink='add/{{data.id}}'>
+                        Edit
+                    </button>
+                    <button class="btn btn-danger mx-3" (click)="delete(data)">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
